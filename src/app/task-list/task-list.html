@@ -1,0 +1,131 @@
+<div class="board">
+
+
+
+<div *ngIf="editingTask" class="edit-box">
+
+<h3>Edit Task</h3>
+
+<label>Title</label>
+<input [(ngModel)]="editingTask.title">
+
+<label>Description</label>
+<textarea [(ngModel)]="editingTask.description"></textarea>
+
+<label>Status</label>
+<select [(ngModel)]="editingTask.status">
+<option value="TODO">TODO</option>
+<option value="DOING">DOING</option>
+<option value="DONE">DONE</option>
+</select>
+
+<div class="edit-buttons">
+<button class="save" (click)="save()">Save</button>
+<button class="cancel" (click)="cancel()">Cancel</button>
+</div>
+
+</div>
+
+
+
+
+<div class="column todo">
+
+<h3>TO DO</h3>
+
+<div *ngFor="let task of tasks">
+<div *ngIf="task.status==='TODO'" class="task-card todo-card">
+
+<div class="color"></div>
+
+<div class="task-content">
+
+<div class="task-header">
+
+<h4>{{task.title}}</h4>
+
+<div class="buttons">
+<button class="edit" (click)="edit(task)">✏</button>
+<button class="delete" (click)="delete(task.id)">✕</button>
+</div>
+
+</div>
+
+<p>{{task.description}}</p>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+
+
+
+<div class="column doing">
+
+<h3>DOING</h3>
+
+<div *ngFor="let task of tasks">
+<div *ngIf="task.status==='DOING'" class="task-card doing-card">
+
+<div class="color"></div>
+
+<div class="task-content">
+
+<div class="task-header">
+
+<h4>{{task.title}}</h4>
+
+<div class="buttons">
+<button class="edit" (click)="edit(task)">✏</button>
+<button class="delete" (click)="delete(task.id)">✕</button>
+</div>
+
+</div>
+
+<p>{{task.description}}</p>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+
+
+
+<div class="column done">
+
+<h3>DONE</h3>
+
+<div *ngFor="let task of tasks">
+<div *ngIf="task.status==='DONE'" class="task-card done-card">
+
+<div class="color"></div>
+
+<div class="task-content">
+
+<div class="task-header">
+
+<h4>{{task.title}}</h4>
+
+<div class="buttons">
+<button class="edit" (click)="edit(task)">✏</button>
+<button class="delete" (click)="delete(task.id)">✕</button>
+</div>
+
+</div>
+
+<p>{{task.description}}</p>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+</div>

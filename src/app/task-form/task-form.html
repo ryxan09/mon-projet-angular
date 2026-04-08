@@ -1,0 +1,24 @@
+<div class="form-container">
+
+<div class="form-card">
+
+<h2>Create New Task</h2>
+
+<label>Title</label>
+<input [(ngModel)]="title" placeholder="Task title">
+
+<label>Description</label>
+<textarea [(ngModel)]="description"></textarea>
+
+<label>Status</label>
+<select [(ngModel)]="status">
+<option value="TODO">TODO</option>
+<option value="DOING">DOING</option>
+<option value="DONE">DONE</option>
+</select>
+
+<button (click)="create()">Create Task</button>
+
+</div>
+
+</div>
