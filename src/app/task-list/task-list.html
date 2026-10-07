@@ -1,29 +1,42 @@
 <div class="board">
 
+<p *ngIf="loading" role="status">Loading tasks...</p>
+<p *ngIf="errorMessage" role="alert">{{errorMessage}}</p>
 
 
-<div *ngIf="editingTask" class="edit-box">
+<div *ngIf="editingTask" class="edit-backdrop" (click)="cancel()">
 
-<h3>Edit Task</h3>
+<section class="edit-box" role="dialog" aria-modal="true" aria-labelledby="edit-task-title" (click)="$event.stopPropagation()">
 
-<label>Title</label>
-<input [(ngModel)]="editingTask.title">
+<div class="edit-heading">
+<div>
+<p class="edit-eyebrow">TASK DETAILS</p>
+<h3 id="edit-task-title">Edit task</h3>
+</div>
+<button class="close-edit" type="button" aria-label="Close edit panel" (click)="cancel()" [disabled]="saving">×</button>
+</div>
 
-<label>Description</label>
-<textarea [(ngModel)]="editingTask.description"></textarea>
+<div class="edit-fields">
+<label for="edit-task-name">Title</label>
+<input id="edit-task-name" [(ngModel)]="editingTask.title" placeholder="Give your task a name">
 
-<label>Status</label>
-<select [(ngModel)]="editingTask.status">
+<label for="edit-task-description">Description</label>
+<textarea id="edit-task-description" [(ngModel)]="editingTask.description" placeholder="Add a few details"></textarea>
+
+<label for="edit-task-status">Status</label>
+<select id="edit-task-status" [(ngModel)]="editingTask.status">
 <option value="TODO">TODO</option>
 <option value="DOING">DOING</option>
 <option value="DONE">DONE</option>
 </select>
-
-<div class="edit-buttons">
-<button class="save" (click)="save()">Save</button>
-<button class="cancel" (click)="cancel()">Cancel</button>
 </div>
 
+<div class="edit-buttons">
+<button class="cancel" type="button" (click)="cancel()" [disabled]="saving">Cancel</button>
+<button class="save" type="button" (click)="save()" [disabled]="saving || !editingTask.title.trim()">{{saving ? 'Saving...' : 'Save changes'}}</button>
+</div>
+
+</section>
 </div>
 
 
@@ -45,8 +58,8 @@
 <h4>{{task.title}}</h4>
 
 <div class="buttons">
-<button class="edit" (click)="edit(task)">✏</button>
-<button class="delete" (click)="delete(task.id)">✕</button>
+<button class="edit" (click)="edit(task)" [disabled]="deletingTaskId === task.id">✏</button>
+<button class="delete" (click)="delete(task.id)" [disabled]="deletingTaskId === task.id">{{deletingTaskId === task.id ? '…' : '✕'}}</button>
 </div>
 
 </div>
@@ -79,8 +92,8 @@
 <h4>{{task.title}}</h4>
 
 <div class="buttons">
-<button class="edit" (click)="edit(task)">✏</button>
-<button class="delete" (click)="delete(task.id)">✕</button>
+<button class="edit" (click)="edit(task)" [disabled]="deletingTaskId === task.id">✏</button>
+<button class="delete" (click)="delete(task.id)" [disabled]="deletingTaskId === task.id">{{deletingTaskId === task.id ? '…' : '✕'}}</button>
 </div>
 
 </div>
@@ -113,8 +126,8 @@
 <h4>{{task.title}}</h4>
 
 <div class="buttons">
-<button class="edit" (click)="edit(task)">✏</button>
-<button class="delete" (click)="delete(task.id)">✕</button>
+<button class="edit" (click)="edit(task)" [disabled]="deletingTaskId === task.id">✏</button>
+<button class="delete" (click)="delete(task.id)" [disabled]="deletingTaskId === task.id">{{deletingTaskId === task.id ? '…' : '✕'}}</button>
 </div>
 
 </div>

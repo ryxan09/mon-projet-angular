@@ -1,12 +1,17 @@
 <nav class="navbar">
 
-<h2>TaskBoard</h2>
+  <a class="brand" routerLink="/tasks" aria-label="TaskBoard home">
+    <span class="brand-mark" aria-hidden="true">T</span>
+    <span class="brand-name">Task<span>Board</span></span>
+  </a>
 
-<div>
-<a routerLink="/tasks">Tasks</a>
-<br> 
-<a routerLink="/new-task">+New Task</a>
-</div>
+  <div class="menu" aria-label="Main navigation">
+    <a class="nav-link" routerLink="/tasks" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Tasks</a>
+    <a class="nav-link new-task-link" routerLink="/new-task" routerLinkActive="active">
+      <span aria-hidden="true">+</span>
+      <span>New task</span>
+    </a>
+  </div>
 
 </nav>
 

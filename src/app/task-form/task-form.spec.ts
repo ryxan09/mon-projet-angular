@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideRouter } from '@angular/router';
+import { of } from 'rxjs';
 import { TaskForm } from './task-form';
+import { TaskService } from '../services/task';
 
 describe('TaskForm', () => {
   let component: TaskForm;
@@ -9,6 +11,13 @@ describe('TaskForm', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TaskForm],
+      providers: [
+        provideRouter([]),
+        {
+          provide: TaskService,
+          useValue: { addTask: () => of({ id: 1, title: 'Plan', description: '', status: 'TODO' }) },
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TaskForm);

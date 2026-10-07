@@ -4,6 +4,8 @@
 
 <h2>Create New Task</h2>
 
+<p *ngIf="errorMessage" role="alert">{{errorMessage}}</p>
+
 <label>Title</label>
 <input [(ngModel)]="title" placeholder="Task title">
 
@@ -17,7 +19,9 @@
 <option value="DONE">DONE</option>
 </select>
 
-<button (click)="create()">Create Task</button>
+<button (click)="create()" [disabled]="creating || !title.trim()">
+  {{creating ? 'Creating...' : 'Create Task'}}
+</button>
 
 </div>
 
